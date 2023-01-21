@@ -2,6 +2,7 @@ package it.uninsubria.isport
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
@@ -83,5 +84,10 @@ class DatabaseHelper(context: Context) :
         } else {
             Toast.makeText(context, "Account creato correttamente!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun readAllCampi(): Cursor {
+        val db:SQLiteDatabase = this.readableDatabase
+        return db.rawQuery("SELECT * FROM Campo", null)
     }
 }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/mainLayout">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/idCampoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1234"
+                android:textColor="#000"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nomeCampoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:gravity="center_horizontal"
+                android:text="Campo 1"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/idCampoText"
+                app:layout_constraintTop_toTopOf="@+id/idCampoText" />
+
+            <TextView
+                android:id="@+id/tipoCampoText"
+                android:layout_width="62dp"
+                android:layout_height="18dp"
+                android:gravity="center_horizontal"
+                android:text="Tipo 1"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@+id/nomeCampoText"
+                app:layout_constraintTop_toBottomOf="@+id/nomeCampoText" />
+
+            <TextView
+                android:id="@+id/orarioCampoText"
+                android:layout_width="90dp"
+                android:layout_height="23dp"
+                android:gravity="center_horizontal"
+                android:text="9:00-22:00"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/indirizzoCampoText"
+                android:layout_width="174dp"
+                android:layout_height="17dp"
+                android:layout_marginTop="36dp"
+                android:gravity="center_horizontal"
+                android:text="indirizzo campo"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/orarioCampoText"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/cittaCampoText"
+                android:layout_width="141dp"
+                android:layout_height="16dp"
+                android:gravity="center_horizontal"
+                android:text="citta' campo"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/indirizzoCampoText"
+                app:layout_constraintTop_toBottomOf="@+id/indirizzoCampoText" />
+
+            <TextView
+                android:id="@+id/provinciaCampoText"
+                android:layout_width="33dp"
+                android:layout_height="16dp"
+                android:gravity="center_horizontal"
+                android:text="PR"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/indirizzoCampoText"
+                app:layout_constraintTop_toBottomOf="@+id/indirizzoCampoText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

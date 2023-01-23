@@ -1,5 +1,6 @@
 package it.uninsubria.isport
 
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,7 +35,7 @@ class RegisterActivity: AppCompatActivity() {
             editor.putString("username", email?.text.toString().trim())
             editor.putString("password", password?.text.toString().trim())
             editor.apply()
-            //val intent = Intent(this@RegisterActivity, UserSportViewActivity::class.java)
+            val intent = Intent(this@RegisterActivity, UserSportViewActivity::class.java)
             startActivity(intent)
         }
     }

@@ -2,6 +2,7 @@ package it.uninsubria.isport
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
@@ -83,5 +84,23 @@ class DatabaseHelper(context: Context) :
         } else {
             Toast.makeText(context, "Account creato correttamente!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun cercaUtente(username: String?, password: String?): ArrayList<String> {
+        val db = this.readableDatabase
+
+        val cursor: Cursor = db.rawQuery(
+            "SELECT EmailUtente, PasswordUtente, FlgAdmin FROM Utente " +
+                    "WHERE EmailUtente = '$username' AND PasswordUtente = '$password'",null)
+
+        val lista: ArrayList<String> = ArrayList()
+        if(cursor.moveToFirst()) {
+            lista.add(cursor.getString(0))
+            lista.add(cursor.getString(1))
+            lista.add(cursor.getString(2))
+        } else{
+            cursor.close()
+        }
+        return lista
     }
 }

@@ -1,5 +1,6 @@
 package it.uninsubria.isport
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -13,12 +14,12 @@ class MainActivity : AppCompatActivity() {
         val accessButton:Button = findViewById(R.id.access_button)
 
         registerButton.setOnClickListener {
-            //val intent = Intent(this@MainActivity, RegisterActivity::class.java)
+            val intent = Intent(this@MainActivity, RegisterActivity::class.java)
             startActivity(intent)
         }
 
         accessButton.setOnClickListener {
-            //val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
             startActivity(intent)
         }
     }

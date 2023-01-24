@@ -89,7 +89,7 @@ class DatabaseHelper(context: Context) :
     fun cercaUtente(username: String?, password: String?): ArrayList<String> {
         val db = this.readableDatabase
 
-        val cursor:Cursor = db.rawQuery(
+        val cursor: Cursor = db.rawQuery(
             "SELECT EmailUtente, PasswordUtente, FlgAdmin FROM Utente " +
                     "WHERE EmailUtente = '$username' AND PasswordUtente = '$password'",null)
 
@@ -102,16 +102,5 @@ class DatabaseHelper(context: Context) :
             cursor.close()
         }
         return lista
-    }
-
-    fun readAllCampi(): Cursor {
-        val db:SQLiteDatabase = this.readableDatabase
-        return db.rawQuery("SELECT * FROM Campo", null)
-    }
-
-    fun getPrenotazioni(username:String):Cursor{
-        val db:SQLiteDatabase = this.readableDatabase
-        return db.rawQuery("SELECT IdUtente FROM Prenotazione " +
-                "WHERE UsernameUtente = '$username'",null)
     }
 }

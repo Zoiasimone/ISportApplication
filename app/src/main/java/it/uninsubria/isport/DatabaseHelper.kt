@@ -108,4 +108,10 @@ class DatabaseHelper(context: Context) :
         val db:SQLiteDatabase = this.readableDatabase
         return db.rawQuery("SELECT * FROM Campo", null)
     }
+
+    fun getPrenotazioni(username:String):Cursor{
+        val db:SQLiteDatabase = this.readableDatabase
+        return db.rawQuery("SELECT IdUtente FROM Prenotazione " +
+                "WHERE UsernameUtente = '$username'",null)
+    }
 }

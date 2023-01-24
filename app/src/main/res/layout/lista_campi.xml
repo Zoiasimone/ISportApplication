@@ -22,7 +22,7 @@
                 android:id="@+id/idCampoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1234"
+                android:text="1"
                 android:textColor="#000"
                 android:textSize="40sp"
                 android:textStyle="bold"
@@ -40,7 +40,7 @@
                 android:text="Campo 1"
                 android:textAlignment="center"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/idCampoText"
                 app:layout_constraintTop_toTopOf="@+id/idCampoText" />
@@ -51,53 +51,47 @@
                 android:layout_height="18dp"
                 android:gravity="center_horizontal"
                 android:text="Tipo 1"
+                android:textColor="#000"
                 android:textAlignment="center"
                 app:layout_constraintStart_toStartOf="@+id/nomeCampoText"
                 app:layout_constraintTop_toBottomOf="@+id/nomeCampoText" />
 
             <TextView
                 android:id="@+id/orarioCampoText"
-                android:layout_width="90dp"
-                android:layout_height="23dp"
-                android:gravity="center_horizontal"
+                android:layout_width="114dp"
+                android:layout_height="21dp"
                 android:text="9:00-22:00"
-                android:textAlignment="center"
+                android:textColor="#000"
+                android:textAlignment="textEnd"
+                android:gravity="end"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/indirizzoCampoText"
-                android:layout_width="174dp"
+                android:layout_width="120dp"
                 android:layout_height="17dp"
                 android:layout_marginTop="36dp"
-                android:gravity="center_horizontal"
+                android:gravity="end"
                 android:text="indirizzo campo"
-                android:textAlignment="center"
+                android:textAlignment="textEnd"
+                android:textColor="#000"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="@+id/orarioCampoText"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/cittaCampoText"
-                android:layout_width="141dp"
-                android:layout_height="16dp"
-                android:gravity="center_horizontal"
+                android:layout_width="120dp"
+                android:layout_height="17dp"
+                android:gravity="end"
                 android:text="citta' campo"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/indirizzoCampoText"
-                app:layout_constraintTop_toBottomOf="@+id/indirizzoCampoText" />
-
-            <TextView
-                android:id="@+id/provinciaCampoText"
-                android:layout_width="33dp"
-                android:layout_height="16dp"
-                android:gravity="center_horizontal"
-                android:text="PR"
-                android:textAlignment="center"
+                android:textAlignment="textEnd"
+                android:textColor="#000"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="@+id/indirizzoCampoText"
+                app:layout_constraintStart_toStartOf="@+id/indirizzoCampoText"
                 app:layout_constraintTop_toBottomOf="@+id/indirizzoCampoText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

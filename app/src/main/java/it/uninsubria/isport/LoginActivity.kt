@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
                     //val intent = Intent(this@LoginActivity, AdminSportViewActivity::class.java)
                     startActivity(intent)
                 } else if(utente[2] == "0") {
-                    //val intent = Intent(this@LoginActivity, UserSportViewActivity::class.java)
+                    val intent = Intent(this@LoginActivity, UserSportViewActivity::class.java)
                     startActivity(intent)
                 }
             } else {

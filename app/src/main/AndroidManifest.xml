@@ -12,12 +12,20 @@
         android:theme="@style/Theme.ISportApplication"
         tools:targetApi="31">
         <activity
+            android:name=".UpdateActivity"
+            android:exported="false"
+            android:label="Modifica/Elimina campo"/>
+        <activity
+            android:name=".AdminSportViewActivity"
+            android:exported="false"
+            android:label="Lista campi"/>
+        <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Login" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.ISportApplication.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,7 +45,7 @@
         <activity
             android:name=".UserSportViewActivity"
             android:exported="false"
-            android:label="Lista Sport">
+            android:label="Lista campi prenotabili">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

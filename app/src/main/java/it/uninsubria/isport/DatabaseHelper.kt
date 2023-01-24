@@ -29,6 +29,9 @@ class DatabaseHelper(context: Context) :
             "(IdCampo INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "NomeCampo TEXT, " +
             "TipoCampo TEXT, " +
+            "IndirizzoCampo TEXT, " +
+            "CittaCampo TEXT, " +
+            "ProvinciaCampo TEXT, " +
             "OrarioCampo TEXT);"
 
     private val queryPrenotazione = "CREATE TABLE IF NOT EXISTS Prenotazione" +
@@ -47,10 +50,10 @@ class DatabaseHelper(context: Context) :
             "VALUES('Simone','Zoia','14/09/1999','zoiasimone@yahoo.it','Pass1','3460983453','1')," +
             "('Matteo','Gallazzi','03/11/1998','matteogallazzi@gmail.com','Pass2','3457968542','0');"
 
-    private val insertCampi = "INSERT INTO Campo(NomeCampo,TipoCampo,OrarioCampo) " +
-                "VALUES('Campo comunale','Calcio a 5','9:00-22-00')," +
-                "('Centro sportivo Galeazzi','Tennis singolo/doppio','10:00-20:00')," +
-                "('Centro cestistico','Basket','13:00-21:00');"
+    private val insertCampi = "INSERT INTO Campo(NomeCampo,TipoCampo,IndirizzoCampo,CittaCampo,ProvinciaCampo,OrarioCampo) " +
+            "VALUES('Campo comunale','Calcio a 5','Via Roma 38','Busto Arsizio','VA','9:00-22-00')," +
+            "('Centro sportivo Galeazzi','Tennis singolo/doppio','Via Giudici 10','Legnano','MI','10:00-20:00')," +
+            "('Centro cestistico','Basket','Via Verdi 46','Gallarate','VA','13:00-21:00');"
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(queryUtente)
@@ -102,5 +105,33 @@ class DatabaseHelper(context: Context) :
             cursor.close()
         }
         return lista
+    }
+
+    fun readAllCampi(): Cursor {
+        val db:SQLiteDatabase = this.readableDatabase
+        return db.rawQuery("SELECT * FROM Campo", null)
+    }
+
+    fun updateCampo(row_id: String, nome: String, tipo: String, indirizzo:String, citta:String, provincia:String, orario: String) {
+        val db:SQLiteDatabase = this.writableDatabase
+        val cv = ContentValues()
+        cv.put("NomeCampo", nome)
+        cv.put("TipoCampo", tipo)
+        cv.put("IndirizzoCampo", indirizzo)
+        cv.put("CittaCampo", citta)
+        cv.put("ProvinciaCampo", provincia)
+        cv.put("OrarioCampo", orario)
+        val result = db.update("Campo", cv, "IdCampo=?", arrayOf(row_id)).toLong()
+        if (result == -1L) {
+            Toast.makeText(context, "Qualcosa e' andato storto", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Campo aggiornato correttamente!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun getPrenotazioni(username:String):Cursor{
+        val db:SQLiteDatabase = this.readableDatabase
+        return db.rawQuery("SELECT IdUtente FROM Prenotazione " +
+                "WHERE UsernameUtente = '$username'",null)
     }
 }

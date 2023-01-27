@@ -34,7 +34,7 @@ class AdminSportViewActivity: AppCompatActivity() {
         }
 
         addButton.setOnClickListener{
-            //val intent = Intent(this@AdminSportViewActivity,AddSportActivity::class.java)
+            val intent = Intent(this@AdminSportViewActivity,AddSportActivity::class.java)
             startActivity(intent)
         }
     }

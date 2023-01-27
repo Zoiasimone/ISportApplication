@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="70dp"
         android:text="Prenota campo"
+        android:backgroundTint="@color/Gray"
         app:layout_constraintBottom_toBottomOf="@+id/listaCampi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

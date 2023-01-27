@@ -12,13 +12,21 @@
         android:theme="@style/Theme.ISportApplication"
         tools:targetApi="31">
         <activity
+            android:name=".AddSportActivity"
+            android:exported="false"
+            android:label="Aggiungi campo"/>
+        <activity
+            android:name=".ReservationActivity"
+            android:exported="false"
+            android:label="Prenota un campo"/>
+        <activity
             android:name=".UpdateActivity"
             android:exported="false"
-            android:label="Modifica/Elimina campo"/>
+            android:label="Modifica/Elimina campo" />
         <activity
             android:name=".AdminSportViewActivity"
             android:exported="false"
-            android:label="Lista campi"/>
+            android:label="Lista campi" />
         <activity
             android:name=".LoginActivity"
             android:exported="false"

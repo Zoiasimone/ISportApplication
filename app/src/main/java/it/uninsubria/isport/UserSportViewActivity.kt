@@ -31,7 +31,7 @@ class UserSportViewActivity : AppCompatActivity() {
             val username: String? = prefs.getString("username",null)
             val cursor:Cursor = db.getPrenotazioni(username.toString())
             if(cursor.count < 3) {
-            //    val intent = Intent(this@UserSportViewActivity, ReservationActivity::class.java)
+                val intent = Intent(this@UserSportViewActivity, ReservationActivity::class.java)
                 startActivity(intent)
             } else {
                 Toast.makeText(this, "Hai gia' effettuato 3 prenotazioni!", Toast.LENGTH_SHORT).show()

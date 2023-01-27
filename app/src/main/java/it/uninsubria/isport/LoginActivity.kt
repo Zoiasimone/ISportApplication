@@ -26,11 +26,11 @@ class LoginActivity : AppCompatActivity() {
 
             if(utente[0] == username?.text.toString().trim() && utente[1] == password?.text.toString().trim()) {
                 val editor: SharedPreferences.Editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit()
-                editor.putString("username", username.toString())
-                editor.putString("password", password.toString())
+                editor.putString("username", username?.text.toString().trim())
+                editor.putString("password", password?.text.toString().trim())
                 editor.apply()
                 if(utente[2] == "1"){
-                    //val intent = Intent(this@LoginActivity, AdminSportViewActivity::class.java)
+                    val intent = Intent(this@LoginActivity, AdminSportViewActivity::class.java)
                     startActivity(intent)
                 } else if(utente[2] == "0") {
                     val intent = Intent(this@LoginActivity, UserSportViewActivity::class.java)

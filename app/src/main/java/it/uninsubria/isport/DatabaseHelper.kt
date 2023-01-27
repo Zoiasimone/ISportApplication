@@ -112,6 +112,24 @@ class DatabaseHelper(context: Context) :
         return db.rawQuery("SELECT * FROM Campo", null)
     }
 
+    fun addCampo(nomeCampo: String?, tipoCampo: String?, indirizzoCampo: String?,
+                 cittaCampo: String?, provinciaCampo:String?, orarioCampo: String?) {
+        val db = this.writableDatabase
+        val cv = ContentValues()
+        cv.put("NomeCampo", nomeCampo)
+        cv.put("TipoCampo", tipoCampo)
+        cv.put("IndirizzoCampo", indirizzoCampo)
+        cv.put("CittaCampo", cittaCampo)
+        cv.put("ProvinciaCampo", provinciaCampo)
+        cv.put("OrarioCampo", orarioCampo)
+        val result = db.insert("Campo", null, cv)
+        if (result == -1L) {
+            Toast.makeText(context, "Qualcosa e' andato storto", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Campo aggiunto correttamente!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     fun updateCampo(row_id: String, nome: String, tipo: String, indirizzo:String, citta:String, provincia:String, orario: String) {
         val db:SQLiteDatabase = this.writableDatabase
         val cv = ContentValues()
@@ -133,5 +151,53 @@ class DatabaseHelper(context: Context) :
         val db:SQLiteDatabase = this.readableDatabase
         return db.rawQuery("SELECT IdUtente FROM Prenotazione " +
                 "WHERE UsernameUtente = '$username'",null)
+    }
+
+    fun getTipoCampoAndIndirizzoCampo(campo:String): Cursor {
+        val db:SQLiteDatabase = this.readableDatabase
+        val cursor:Cursor = db.rawQuery("SELECT IdCampo FROM Campo WHERE NomeCampo = '$campo'",null)
+        cursor.moveToFirst()
+        val id:Int = cursor.getInt(0)
+        return db.rawQuery("SELECT TipoCampo,IndirizzoCampo,CittaCampo,ProvinciaCampo FROM Campo WHERE IdCampo = $id", null)
+    }
+
+    fun cercaIdUtenteByUsername(username: String): Int {
+        val db: SQLiteDatabase = this.readableDatabase
+        val cursor: Cursor = db.rawQuery("SELECT IdUtente FROM Utente WHERE EmailUtente = '$username'", null)
+        cursor.moveToFirst()
+        return cursor.getInt(0)
+    }
+
+    fun cercaIdCampoByNomeCampo(nomeCampo: String): Int {
+        val db: SQLiteDatabase = this.readableDatabase
+        val cursor: Cursor = db.rawQuery("SELECT IdCampo FROM Campo WHERE NomeCampo = '$nomeCampo'", null)
+        cursor.moveToFirst()
+        return cursor.getInt(0)
+    }
+
+    fun prenotazioneGiaPresente(orario:String, data:String):Cursor {
+        val db:SQLiteDatabase = this.readableDatabase
+        return db.rawQuery("SELECT IdCampo FROM Prenotazione WHERE OrarioPrenotazione = '$orario' AND DataPrenotazione = '$data'",null)
+    }
+
+    fun insertPrenotazione(idUtente:Int, username: String, idCampo:Int, orario: String, data: String) {
+        val db:SQLiteDatabase = this.writableDatabase
+        val cv = ContentValues()
+        cv.put("IdUtente", idUtente)
+        cv.put("UsernameUtente", username)
+        cv.put("IdCampo", idCampo)
+        cv.put("OrarioPrenotazione", orario)
+        cv.put("DataPrenotazione", data)
+        val result = db.insert("Prenotazione", null, cv)
+        if (result == -1L) {
+            Toast.makeText(context, "Qualcosa e' andato storto", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Prenotazione effettuata!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun getNomeCampi(): Cursor {
+        val db:SQLiteDatabase = this.readableDatabase
+        return db.rawQuery("SELECT NomeCampo FROM Campo", null)
     }
 }

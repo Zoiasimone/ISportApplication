@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/mainLayout">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/LightGrey">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/idCampoPrenotato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="#000"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nomeCampoPrenotato"
+                android:layout_width="251dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="Campo 1"
+                android:textAlignment="textStart"
+                android:gravity="start"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/idCampoPrenotato"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tipoCampoPrenotato"
+                android:layout_width="194dp"
+                android:layout_height="19dp"
+                android:text="Tipo 1"
+                android:textAlignment="textStart"
+                android:gravity="start"
+                android:textColor="#000"
+                app:layout_constraintEnd_toEndOf="@+id/nomeCampoPrenotato"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/nomeCampoPrenotato"
+                app:layout_constraintTop_toBottomOf="@+id/nomeCampoPrenotato" />
+
+            <TextView
+                android:id="@+id/orarioCampoPrenotato"
+                android:layout_width="98dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="36dp"
+                android:gravity="center_horizontal"
+                android:text="9:00-22:00"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dataCampoPrenotato"
+                android:layout_width="98dp"
+                android:layout_height="21dp"
+                android:gravity="center_horizontal"
+                android:text="9:00-22:00"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/orarioCampoPrenotato"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/orarioCampoPrenotato" />
+
+            <TextView
+                android:id="@+id/indirizzoCampoPrenotato"
+                android:layout_width="120dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
+                android:text="indirizzo campo"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/idCampoPrenotato"
+                app:layout_constraintTop_toBottomOf="@+id/tipoCampoPrenotato" />
+
+            <TextView
+                android:id="@+id/cittaCampoPrenotato"
+                android:layout_width="120dp"
+                android:layout_height="17dp"
+                android:gravity="center_horizontal"
+                android:text="citta' campo"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/indirizzoCampoPrenotato"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/indirizzoCampoPrenotato"
+                app:layout_constraintTop_toBottomOf="@+id/indirizzoCampoPrenotato" />
+
+            <ImageView
+                android:id="@+id/deleteButtonImage"
+                android:layout_width="26dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/ic_delete" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

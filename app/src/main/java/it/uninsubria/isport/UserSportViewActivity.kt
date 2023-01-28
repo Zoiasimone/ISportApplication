@@ -4,6 +4,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.database.Cursor
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
@@ -58,6 +60,20 @@ class UserSportViewActivity : AppCompatActivity() {
             }
         }
         return campi
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.profile_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.profileItem){
+            val intent = Intent(this@UserSportViewActivity,UserProfileActivity::class.java)
+            startActivity(intent)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
 

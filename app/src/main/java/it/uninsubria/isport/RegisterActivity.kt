@@ -21,7 +21,7 @@ class RegisterActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        nome = findViewById(R.id.nomeutente)
+        nome = findViewById(R.id.nomeUtente)
         cognome = findViewById(R.id.cognomeUtente)
         dataDiNascita = findViewById(R.id.nascitaUtente)
         comune = findViewById(R.id.comuneUtente)

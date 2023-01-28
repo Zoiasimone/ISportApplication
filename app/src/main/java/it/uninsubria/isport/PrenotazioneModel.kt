@@ -1,13 +1,15 @@
 package it.uninsubria.isport
 
+import android.widget.ImageButton
+
 class PrenotazioneModel(
-    var idCampoPrenotazione: String,
-    var nomeCampoPrenotazione: String,
-    var tipoCampoPrenotazione: String,
-    var indirizzoPrenotazione: String,
-    var cittaPrenotazione: String,
-    var provinciaPrenotazione: String,
-    var orarioPrenotazione: String,
-    var dataPrenotazione: String)
+    val idCampoPrenotazione: String,
+    val nomeCampoPrenotazione: String,
+    val tipoCampoPrenotazione: String,
+    val indirizzoPrenotazione: String,
+    val cittaPrenotazione: String,
+    val provinciaPrenotazione: String,
+    val orarioPrenotazione: String,
+    val dataPrenotazione: String)
 
 

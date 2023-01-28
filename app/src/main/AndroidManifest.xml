@@ -12,13 +12,16 @@
         android:theme="@style/Theme.ISportApplication"
         tools:targetApi="31">
         <activity
+            android:name=".DeleteReservationActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddSportActivity"
             android:exported="false"
-            android:label="Aggiungi campo"/>
+            android:label="Aggiungi campo" />
         <activity
             android:name=".ReservationActivity"
             android:exported="false"
-            android:label="Prenota un campo"/>
+            android:label="Prenota un campo" />
         <activity
             android:name=".UpdateActivity"
             android:exported="false"
@@ -34,7 +37,7 @@
         <activity
             android:name=".UserProfileActivity"
             android:exported="false"
-            android:label="Profilo utente"/>
+            android:label="Profilo utente" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

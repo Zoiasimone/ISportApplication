@@ -1,5 +1,6 @@
 package it.uninsubria.isport
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -52,7 +53,12 @@ class UpdateActivity : AppCompatActivity() {
             provincia = provinciaCampo!!.text.toString().trim { it <= ' ' }
             orario = orarioCampo!!.text.toString().trim { it <= ' ' }
             db.updateCampo(id!!, nome!!, tipo!!, indirizzo!!, citta!!, provincia!!, orario!!)
+            val intent = Intent(this@UpdateActivity, AdminSportViewActivity::class.java)
+            startActivity(intent)
+            finish()
         }
+
+        deleteButton.setOnClickListener{ confirmDialog() }
     }
 
     private fun getIntentData() {
@@ -79,5 +85,20 @@ class UpdateActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Nessun dato trovato", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun confirmDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Eliminare $nome ?")
+        builder.setMessage("Sei sicuro di voler eliminare il campo $nome ?")
+        builder.setPositiveButton("Si") { dialogInterface, i ->
+            val db = DatabaseHelper(this@UpdateActivity)
+            db.deleteCampo(id)
+            val intent = Intent(this@UpdateActivity, AdminSportViewActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        builder.setNegativeButton("No") { dialogInterface, i -> }
+        builder.create().show()
     }
 }

@@ -1,14 +1,18 @@
 package it.uninsubria.isport
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.database.Cursor
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.get
+import androidx.appcompat.app.AppCompatActivity
+
 
 class UserProfileActivity: AppCompatActivity() {
 
@@ -16,6 +20,7 @@ class UserProfileActivity: AppCompatActivity() {
     private var cognome: TextView? = null
     private var dataDiNascita: TextView? = null
     private var email: TextView? = null
+    private var comune: TextView? = null
     private var telefono: TextView? = null
     private val db = DatabaseHelper(this@UserProfileActivity)
 
@@ -26,7 +31,9 @@ class UserProfileActivity: AppCompatActivity() {
         cognome = findViewById(R.id.cognomeProfilo)
         dataDiNascita = findViewById(R.id.nascitaProfilo)
         email = findViewById(R.id.emailProfilo)
+        comune = findViewById(R.id.comuneProfilo)
         telefono = findViewById(R.id.telefonoProfilo)
+
 
         val prefs:SharedPreferences = getSharedPreferences("PREFS", MODE_PRIVATE)
         val username: String? = prefs.getString("username",null)
@@ -36,11 +43,10 @@ class UserProfileActivity: AppCompatActivity() {
             nome!!.text = cursor.getString(1)
             cognome!!.text = cursor.getString(2)
             dataDiNascita!!.text = cursor.getString(3)
+            comune!!.text = cursor.getString(4)
             email!!.text = cursor.getString(5)
             telefono!!.text = cursor.getString(7)
         }
-
-        aggiungiCampiInArray()
 
         val arrayOfPrenotazioni: ArrayList<PrenotazioneModel?> = aggiungiCampiInArray()
 
@@ -71,5 +77,19 @@ class UserProfileActivity: AppCompatActivity() {
             }
         }
         return prenotazioni
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.delete_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.deleteItem) {
+            val intent = Intent(this@UserProfileActivity, DeleteReservationActivity::class.java)
+            startActivity(intent)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

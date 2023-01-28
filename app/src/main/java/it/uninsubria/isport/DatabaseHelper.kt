@@ -245,4 +245,34 @@ class DatabaseHelper(context: Context) :
         cursor.moveToFirst()
         return cursor.getString(0)
     }
+
+    fun deleteCampo(row_id: String?) {
+        val db:SQLiteDatabase = this.writableDatabase
+        val result = db.delete("Campo", "IdCampo=?", arrayOf(row_id)).toLong()
+        if (result == -1L) {
+            Toast.makeText(context, "Qualcosa e' andato storto", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Campo cancellato correttamente", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun getDatePrenotazioni(username:String): Cursor {
+        val db:SQLiteDatabase = this.readableDatabase
+        return db.rawQuery("SELECT DataPrenotazione FROM Prenotazione " +
+                " WHERE UsernameUtente = '$username'", null)
+    }
+
+    fun getOrariPrenotazioni(username:String): Cursor {
+        val db:SQLiteDatabase = this.readableDatabase
+        return db.rawQuery("SELECT OrarioPrenotazione FROM Prenotazione " +
+                " WHERE UsernameUtente = '$username'", null)
+    }
+
+    fun getOrariByData(data:String,username:String): Cursor {
+        val db:SQLiteDatabase = this.readableDatabase
+        return db.rawQuery("SELECT OrarioPrenotazione " +
+                                            "FROM Prenotazione " +
+                                            "WHERE DataPrenotazione = '$data' " +
+                                            "AND UsernameUtente = '$username'",null)
+    }
 }

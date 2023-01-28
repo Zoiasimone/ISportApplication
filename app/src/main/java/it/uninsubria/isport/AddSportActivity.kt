@@ -1,5 +1,6 @@
 package it.uninsubria.isport
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -37,6 +38,9 @@ class AddSportActivity : AppCompatActivity() {
                 provinciaCampo = provinciaCampo?.text.toString().trim(),
                 orarioCampo = orarioCampo?.text.toString().trim()
             )
+            val intent = Intent(this@AddSportActivity,AdminSportViewActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

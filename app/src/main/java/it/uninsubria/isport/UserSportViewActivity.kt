@@ -29,19 +29,16 @@ class UserSportViewActivity : AppCompatActivity() {
         listView.adapter = adapterCampi
 
         registrationButton.setOnClickListener {
-            val prefs:SharedPreferences = getSharedPreferences("PREFS", MODE_PRIVATE)
-            val username: String? = prefs.getString("username",null)
-            val cursor:Cursor = db.getPrenotazioni(username.toString())
-            if(cursor.count < 3) {
-                val intent = Intent(this@UserSportViewActivity, ReservationActivity::class.java)
-                startActivity(intent)
-            } else {
-                Toast.makeText(this, "Hai gia' effettuato 3 prenotazioni!", Toast.LENGTH_SHORT).show()
-            }
+            val intent = Intent(this@UserSportViewActivity, ReservationActivity::class.java)
+            startActivity(intent)
         }
     }
 
     private fun aggiungiCampiInArray() : ArrayList<CampoModel?> {
+        val prefs:SharedPreferences = getSharedPreferences("PREFS", MODE_PRIVATE)
+        val username: String? = prefs.getString("username",null)
+
+        val comune:String = db.getComuneUtente(username.toString())
         val cursor:Cursor = db.readAllCampi()
         val campi:ArrayList<CampoModel?> = ArrayList()
         var campo:CampoModel?
@@ -49,14 +46,18 @@ class UserSportViewActivity : AppCompatActivity() {
             Toast.makeText(this, "Nessun Campo trovato!", Toast.LENGTH_SHORT).show()
         } else {
             while(cursor.moveToNext()) {
-                campo = CampoModel(idCampo = cursor.getInt(0).toString().trim(),
-                    nomeCampo = cursor.getString(1).toString().trim(),
-                    tipoCampo = cursor.getString(2).toString().trim(),
-                    indirizzoCampo = cursor.getString(3).toString().trim(),
-                    cittaCampo = cursor.getString(4).toString().trim(),
-                    provinciaCampo = cursor.getString(5).toString().trim(),
-                    orarioCampo = cursor.getString(6).toString().trim())
-                campi.add(campo)
+                if(cursor.getString(4) == comune) {
+                    campo = CampoModel(
+                        idCampo = cursor.getInt(0).toString().trim(),
+                        nomeCampo = cursor.getString(1).toString().trim(),
+                        tipoCampo = cursor.getString(2).toString().trim(),
+                        indirizzoCampo = cursor.getString(3).toString().trim(),
+                        cittaCampo = cursor.getString(4).toString().trim(),
+                        provinciaCampo = cursor.getString(5).toString().trim(),
+                        orarioCampo = cursor.getString(6).toString().trim()
+                    )
+                    campi.add(campo)
+                }
             }
         }
         return campi

@@ -12,6 +12,7 @@ class RegisterActivity: AppCompatActivity() {
     private var nome: EditText? = null
     private var cognome: EditText? = null
     private var dataDiNascita: EditText? = null
+    private var comune: EditText? = null
     private var email: EditText? = null
     private var password: EditText? = null
     private var telefono: EditText? = null
@@ -23,6 +24,7 @@ class RegisterActivity: AppCompatActivity() {
         nome = findViewById(R.id.nomeutente)
         cognome = findViewById(R.id.cognomeUtente)
         dataDiNascita = findViewById(R.id.nascitaUtente)
+        comune = findViewById(R.id.comuneUtente)
         email = findViewById(R.id.emailUtente)
         password = findViewById(R.id.passwordUtente)
         telefono = findViewById(R.id.telefonoUtente)
@@ -30,10 +32,11 @@ class RegisterActivity: AppCompatActivity() {
 
         registerButton.setOnClickListener {
             db.addUtente(nome?.text.toString(),cognome?.text.toString().trim(),dataDiNascita?.text.toString().trim(),
-                email?.text.toString().trim(),password?.text.toString().trim(),telefono?.text.toString().trim())
+                comune?.text.toString().trim(),email?.text.toString().trim(),password?.text.toString().trim(),telefono?.text.toString().trim())
             val editor: SharedPreferences.Editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit()
             editor.putString("username", email?.text.toString().trim())
             editor.putString("password", password?.text.toString().trim())
+            editor.putString("comune", comune?.text.toString().trim())
             editor.apply()
             val intent = Intent(this@RegisterActivity, UserSportViewActivity::class.java)
             startActivity(intent)

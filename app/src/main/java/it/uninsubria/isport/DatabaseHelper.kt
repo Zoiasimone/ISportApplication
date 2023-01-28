@@ -15,11 +15,12 @@ class DatabaseHelper(context: Context) :
         this.context = context
     }
 
-    private val queryUtente = "CREATE TABLE IF NOT EXISTS Utente " +
+    private val queryUtente = "CREATE TABLE IF NOT EXISTS Utente" +
             "(IdUtente INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "NomeUtente TEXT, " +
             "CognomeUtente TEXT, " +
             "NascitaUtente TEXT, " +
+            "ComuneUtente TEXT, " +
             "EmailUtente TEXT, " +
             "PasswordUtente TEXT, " +
             "TelefonoUtente TEXT, " +
@@ -41,18 +42,19 @@ class DatabaseHelper(context: Context) :
             "UsernameUtente TEXT, " +
             "OrarioPrenotazione TEXT, " +
             "DataPrenotazione TEXT, " +
+            "SettimanaPrenotazione INTEGER, " +
             "FOREIGN KEY (IdCampo) REFERENCES Campo(IdCampo), " +
             "FOREIGN KEY (IdUtente) REFERENCES Utente(IdUtente), " +
             "FOREIGN KEY (UsernameUtente) REFERENCES Utente(EmailUtente));"
 
     private val insertUtenti = "INSERT INTO Utente(nomeUtente,CognomeUtente,NascitaUtente," +
-            "EmailUtente,PasswordUtente,TelefonoUtente,FlgAdmin) " +
-            "VALUES('Simone','Zoia','14/09/1999','zoiasimone@yahoo.it','Pass1','3460983453','1')," +
-            "('Matteo','Gallazzi','03/11/1998','matteogallazzi@gmail.com','Pass2','3457968542','0');"
+            "ComuneUtente,EmailUtente,PasswordUtente,TelefonoUtente,FlgAdmin) " +
+            "VALUES('Simone','Zoia','14/09/1999','Gorla Maggiore','zoiasimone@yahoo.it','Pass1','3460983453','1')," +
+            "('Matteo','Gallazzi','03/11/1998','Busto Arsizio','matteogallazzi@gmail.com','Pass2','3457968542','0');"
 
     private val insertCampi = "INSERT INTO Campo(NomeCampo,TipoCampo,IndirizzoCampo,CittaCampo,ProvinciaCampo,OrarioCampo) " +
             "VALUES('Campo comunale','Calcio a 5','Via Roma 38','Busto Arsizio','VA','9:00-22-00')," +
-            "('Centro sportivo Galeazzi','Tennis singolo/doppio','Via Giudici 10','Legnano','MI','10:00-20:00')," +
+            "('Centro sportivo Galeazzi','Tennis singolo/doppio','Via Giudici 10','Busto Arsizio','VA','10:00-20:00')," +
             "('Centro cestistico','Basket','Via Verdi 46','Gallarate','VA','13:00-21:00');"
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -71,13 +73,14 @@ class DatabaseHelper(context: Context) :
     }
 
     fun addUtente(
-        nomeUtente: String?, cognomeUtente: String?, nascitaUtente: String?,
+        nomeUtente: String?, cognomeUtente: String?, nascitaUtente: String?,comune:String?,
         emailUtente: String?, passwordUtente: String?, telefonoUtente: String?) {
         val db = this.writableDatabase
         val cv = ContentValues()
         cv.put("NomeUtente", nomeUtente)
         cv.put("CognomeUtente", cognomeUtente)
         cv.put("NascitaUtente", nascitaUtente)
+        cv.put("ComuneUtente", comune)
         cv.put("EmailUtente", emailUtente)
         cv.put("PasswordUtente", passwordUtente)
         cv.put("TelefonoUtente", telefonoUtente)
@@ -180,7 +183,7 @@ class DatabaseHelper(context: Context) :
         return db.rawQuery("SELECT IdCampo FROM Prenotazione WHERE OrarioPrenotazione = '$orario' AND DataPrenotazione = '$data'",null)
     }
 
-    fun insertPrenotazione(idUtente:Int, username: String, idCampo:Int, orario: String, data: String) {
+    fun insertPrenotazione(idUtente:Int, username: String, idCampo:Int, orario: String, data: String, settimana:Int) {
         val db:SQLiteDatabase = this.writableDatabase
         val cv = ContentValues()
         cv.put("IdUtente", idUtente)
@@ -188,6 +191,7 @@ class DatabaseHelper(context: Context) :
         cv.put("IdCampo", idCampo)
         cv.put("OrarioPrenotazione", orario)
         cv.put("DataPrenotazione", data)
+        cv.put("SettimanaPrenotazione", settimana)
         val result = db.insert("Prenotazione", null, cv)
         if (result == -1L) {
             Toast.makeText(context, "Qualcosa e' andato storto", Toast.LENGTH_SHORT).show()
@@ -196,10 +200,11 @@ class DatabaseHelper(context: Context) :
         }
     }
 
-    fun getNomeCampi(): Cursor {
+    fun getNomeCampi(comune:String): Cursor {
         val db:SQLiteDatabase = this.readableDatabase
-        return db.rawQuery("SELECT NomeCampo FROM Campo", null)
+        return db.rawQuery("SELECT NomeCampo FROM Campo WHERE CittaCampo = '$comune'", null)
     }
+
     fun getUtente(username: String):Cursor {
         val db:SQLiteDatabase = this.readableDatabase
         return db.rawQuery("SELECT * FROM Utente WHERE EmailUtente = '$username'", null)
@@ -224,5 +229,20 @@ class DatabaseHelper(context: Context) :
                 "FROM Prenotazione p " +
                 "JOIN Campo c ON p.IdCampo=c.IdCampo " +
                 "WHERE p.IdUtente = $id", null)
+    }
+
+    fun readSettimanaPrenotazioni(settimana:Int, username:String): Cursor {
+        val db:SQLiteDatabase = this.readableDatabase
+        return db.rawQuery("SELECT SettimanaPrenotazione " +
+                               "FROM Prenotazione WHERE SettimanaPrenotazione = $settimana " +
+                               "AND UsernameUtente = '$username'", null)
+    }
+
+    fun getComuneUtente(username:String):String {
+        val db:SQLiteDatabase = this.readableDatabase
+        val cursor:Cursor = db.rawQuery("SELECT ComuneUtente FROM Utente " +
+                "WHERE EmailUtente = '$username'",null)
+        cursor.moveToFirst()
+        return cursor.getString(0)
     }
 }

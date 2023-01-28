@@ -25,9 +25,11 @@ class LoginActivity : AppCompatActivity() {
             val utente: ArrayList<String> = db.cercaUtente(username?.text.toString().trim(),password?.text.toString().trim())
 
             if(utente[0] == username?.text.toString().trim() && utente[1] == password?.text.toString().trim()) {
+                val comune:String = db.getComuneUtente(username?.text.toString().trim())
                 val editor: SharedPreferences.Editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit()
                 editor.putString("username", username?.text.toString().trim())
                 editor.putString("password", password?.text.toString().trim())
+                editor.putString("comune", comune)
                 editor.apply()
                 if(utente[2] == "1"){
                     val intent = Intent(this@LoginActivity, AdminSportViewActivity::class.java)

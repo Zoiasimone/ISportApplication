@@ -200,4 +200,29 @@ class DatabaseHelper(context: Context) :
         val db:SQLiteDatabase = this.readableDatabase
         return db.rawQuery("SELECT NomeCampo FROM Campo", null)
     }
+    fun getUtente(username: String):Cursor {
+        val db:SQLiteDatabase = this.readableDatabase
+        return db.rawQuery("SELECT * FROM Utente WHERE EmailUtente = '$username'", null)
+    }
+
+    fun deletePrenotazione(orario:String, data:String) {
+        val db:SQLiteDatabase = this.writableDatabase
+        val row_id = db.rawQuery("SELECT IdPrenotazione FROM Prenotazione WHERE OrarioPrenotazione = '$orario' AND DataPrenotazione = '$data'", null)
+        row_id.moveToFirst()
+        val result = db.delete("Prenotazione", "IdPrenotazione=?", arrayOf(row_id.getString(0))).toLong()
+        if (result == -1L) {
+            Toast.makeText(context, "Qualcosa e' andato storto", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Prenotazione cancellata correttamente", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun readPrenotazioni(id:Int): Cursor {
+        val db:SQLiteDatabase = this.readableDatabase
+        return db.rawQuery("SELECT c.IdCampo,c.NomeCampo,c.TipoCampo,c.IndirizzoCampo," +
+                "c.CittaCampo,c.ProvinciaCampo,p.OrarioPrenotazione,p.DataPrenotazione " +
+                "FROM Prenotazione p " +
+                "JOIN Campo c ON p.IdCampo=c.IdCampo " +
+                "WHERE p.IdUtente = $id", null)
+    }
 }

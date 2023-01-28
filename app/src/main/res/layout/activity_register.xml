@@ -7,7 +7,7 @@
     tools:context=".RegisterActivity">
 
     <EditText
-        android:id="@+id/nomeutente"
+        android:id="@+id/nomeUtente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="101dp"
@@ -41,7 +41,7 @@
         android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nomeutente"
+        app:layout_constraintTop_toBottomOf="@+id/nomeUtente"
         android:autofillHints="" />
 
     <TextView
@@ -132,7 +132,7 @@
         android:layout_marginRight="101dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="Data di nascita"
+        android:hint="Nascita(es.28/10/1900)"
         android:inputType="date"
         android:minHeight="48dp"
         android:textColorHint="#757575"
@@ -152,8 +152,8 @@
         android:layout_marginRight="101dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="Data di nascita"
-        android:inputType="date"
+        android:hint="Comune di residenza"
+        android:inputType="text"
         android:minHeight="48dp"
         android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"

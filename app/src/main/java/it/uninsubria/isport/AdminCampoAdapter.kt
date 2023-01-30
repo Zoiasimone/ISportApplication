@@ -21,6 +21,7 @@ class AdminCampoAdapter(context:Context, campi:ArrayList<CampoModel?>) :
         var indirizzoCampoText:TextView? = null
         var cittaCampoText:TextView? = null
         var orarioCampoText:TextView? = null
+        var giorniCampoText:TextView? = null
         var mainLayout:LinearLayout? = null
     }
 
@@ -41,6 +42,7 @@ class AdminCampoAdapter(context:Context, campi:ArrayList<CampoModel?>) :
             viewHolder.indirizzoCampoText = convertView.findViewById(R.id.indirizzoCampoText)
             viewHolder.cittaCampoText = convertView.findViewById(R.id.cittaCampoText)
             viewHolder.orarioCampoText = convertView.findViewById(R.id.orarioCampoText)
+            viewHolder.giorniCampoText = convertView.findViewById(R.id.giorniCampoText)
             viewHolder.mainLayout = convertView.findViewById(R.id.mainLayout)
 
             convertView.tag = viewHolder
@@ -54,6 +56,7 @@ class AdminCampoAdapter(context:Context, campi:ArrayList<CampoModel?>) :
         viewHolder.indirizzoCampoText?.text = campo?.indirizzoCampo.toString().trim()
         viewHolder.cittaCampoText?.text = "${campo?.cittaCampo.toString()}(${campo?.provinciaCampo.toString()})".trim()
         viewHolder.orarioCampoText?.text = campo?.orarioCampo.toString().trim()
+        viewHolder.giorniCampoText?.text = "apertura: ${campo?.giorniCampo.toString().trim()}"
         viewHolder.mainLayout = convertView.findViewById(R.id.mainLayout)
         viewHolder.mainLayout?.setOnClickListener {
             val intent = Intent(context, UpdateActivity::class.java)
@@ -64,6 +67,7 @@ class AdminCampoAdapter(context:Context, campi:ArrayList<CampoModel?>) :
             intent.putExtra("citta", campo?.cittaCampo.toString().trim())
             intent.putExtra("provincia", campo?.provinciaCampo.toString().trim())
             intent.putExtra("orario", campo?.orarioCampo.toString().trim())
+            intent.putExtra("giorni", campo?.giorniCampo.toString().trim())
             context.startActivity(intent)
         }
         return convertView

@@ -7,6 +7,7 @@ class CampoModel(
     var indirizzoCampo: String,
     var cittaCampo: String,
     var provinciaCampo: String,
-    var orarioCampo: String)
+    var orarioCampo: String,
+    var giorniCampo: String)
 
 

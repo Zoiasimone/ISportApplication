@@ -19,6 +19,7 @@ class UpdateActivity : AppCompatActivity() {
     private var citta: String? = null
     private var provincia: String? = null
     private var orario: String? = null
+    private var giorni: String? = null
 
     private var nomeCampo:EditText? = null
     private var tipoCampo:EditText? = null
@@ -26,6 +27,7 @@ class UpdateActivity : AppCompatActivity() {
     private var cittaCampo:EditText? = null
     private var provinciaCampo:EditText? = null
     private var orarioCampo:EditText? = null
+    private var giorniCampo:EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ class UpdateActivity : AppCompatActivity() {
         cittaCampo = findViewById(R.id.cittaCampo2)
         provinciaCampo = findViewById(R.id.provinciaCampo2)
         orarioCampo = findViewById(R.id.orarioCampo2)
+        giorniCampo = findViewById(R.id.giorniCampo2)
         val updateButton:Button = findViewById(R.id.update_button)
         val deleteButton:Button = findViewById(R.id.delete_button)
 
@@ -52,7 +55,8 @@ class UpdateActivity : AppCompatActivity() {
             citta = cittaCampo!!.text.toString().trim { it <= ' ' }
             provincia = provinciaCampo!!.text.toString().trim { it <= ' ' }
             orario = orarioCampo!!.text.toString().trim { it <= ' ' }
-            db.updateCampo(id!!, nome!!, tipo!!, indirizzo!!, citta!!, provincia!!, orario!!)
+            giorni = giorniCampo!!.text.toString().trim { it <= ' ' }
+            db.updateCampo(id!!, nome!!, tipo!!, indirizzo!!, citta!!, provincia!!, orario!!, giorni!!)
             val intent = Intent(this@UpdateActivity, AdminSportViewActivity::class.java)
             startActivity(intent)
             finish()
@@ -65,8 +69,8 @@ class UpdateActivity : AppCompatActivity() {
         if (intent.hasExtra("id") && intent.hasExtra("nome") &&
             intent.hasExtra("tipo") && intent.hasExtra("indirizzo") &&
             intent.hasExtra("citta") && intent.hasExtra("provincia") &&
-            intent.hasExtra("orario")) {
-            //Getting Data from Intent
+            intent.hasExtra("orario") && intent.hasExtra("giorni")) {
+
             id = intent.getStringExtra("id")
             nome = intent.getStringExtra("nome")
             tipo = intent.getStringExtra("tipo")
@@ -74,6 +78,7 @@ class UpdateActivity : AppCompatActivity() {
             citta = intent.getStringExtra("citta")
             provincia = intent.getStringExtra("provincia")
             orario = intent.getStringExtra("orario")
+            giorni = intent.getStringExtra("giorni")
 
             nomeCampo!!.setText(nome)
             tipoCampo!!.setText(tipo)
@@ -81,7 +86,8 @@ class UpdateActivity : AppCompatActivity() {
             cittaCampo!!.setText(citta)
             provinciaCampo!!.setText(provincia)
             orarioCampo!!.setText(orario)
-            Log.d("ISport", "$nome, $tipo, $indirizzo, $citta, $provincia , $orario")
+            giorniCampo!!.setText(giorni)
+            Log.d("ISport", "$nome,$tipo,$indirizzo,$citta,$provincia,$orario,$giorni")
         } else {
             Toast.makeText(this, "Nessun dato trovato", Toast.LENGTH_SHORT).show()
         }

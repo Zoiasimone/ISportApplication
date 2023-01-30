@@ -18,6 +18,7 @@ class UsersCampoAdapter(context:Context, campi:ArrayList<CampoModel?>) :
         var indirizzoCampoText:TextView? = null
         var cittaCampoText:TextView? = null
         var orarioCampoText:TextView? = null
+        var giorniCampoText:TextView? = null
     }
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
@@ -37,6 +38,7 @@ class UsersCampoAdapter(context:Context, campi:ArrayList<CampoModel?>) :
             viewHolder.indirizzoCampoText = convertView.findViewById(R.id.indirizzoCampoText)
             viewHolder.cittaCampoText = convertView.findViewById(R.id.cittaCampoText)
             viewHolder.orarioCampoText = convertView.findViewById(R.id.orarioCampoText)
+            viewHolder.giorniCampoText = convertView.findViewById(R.id.giorniCampoText)
 
             convertView.tag = viewHolder
         } else {
@@ -49,6 +51,7 @@ class UsersCampoAdapter(context:Context, campi:ArrayList<CampoModel?>) :
         viewHolder.indirizzoCampoText?.text = campo?.indirizzoCampo.toString().trim()
         viewHolder.cittaCampoText?.text = "${campo?.cittaCampo.toString()}(${campo?.provinciaCampo.toString()})".trim()
         viewHolder.orarioCampoText?.text = campo?.orarioCampo.toString().trim()
+        viewHolder.giorniCampoText?.text = "apertura: ${campo?.giorniCampo.toString().trim()}"
 
         return convertView
     }

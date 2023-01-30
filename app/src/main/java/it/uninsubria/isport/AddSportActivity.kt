@@ -15,6 +15,7 @@ class AddSportActivity : AppCompatActivity() {
     private var cittaCampo:EditText? = null
     private var provinciaCampo:EditText? = null
     private var orarioCampo:EditText? = null
+    private var giorniCampo:EditText? = null
     private var addSportButton: Button? = null
     private val db = DatabaseHelper(this@AddSportActivity)
 
@@ -28,6 +29,7 @@ class AddSportActivity : AppCompatActivity() {
         cittaCampo = findViewById(R.id.cittaCampo)
         provinciaCampo = findViewById(R.id.provinciaCampo)
         orarioCampo = findViewById(R.id.orarioCampo)
+        giorniCampo = findViewById(R.id.giorniCampo)
         addSportButton = findViewById(R.id.addSportButton)
         addSportButton?.setOnClickListener {
             db.addCampo(
@@ -36,7 +38,8 @@ class AddSportActivity : AppCompatActivity() {
                 indirizzoCampo = indirizzoCampo?.text.toString().trim(),
                 cittaCampo = cittaCampo?.text.toString().trim(),
                 provinciaCampo = provinciaCampo?.text.toString().trim(),
-                orarioCampo = orarioCampo?.text.toString().trim()
+                orarioCampo = orarioCampo?.text.toString().trim(),
+                giorniCampo = giorniCampo?.text.toString().trim()
             )
             val intent = Intent(this@AddSportActivity,AdminSportViewActivity::class.java)
             startActivity(intent)

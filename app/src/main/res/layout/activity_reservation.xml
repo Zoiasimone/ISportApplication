@@ -128,7 +128,7 @@
         android:text="Prenota"
         android:textAllCaps="false"
         android:textSize="20sp"
-        android:backgroundTint="@color/Gray"
+        android:backgroundTint="@color/DarkBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"

@@ -96,15 +96,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/provinciaCampo" />
 
+    <EditText
+        android:id="@+id/giorniCampo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="Giorni apertura(es. lun-ven) "
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orarioCampo" />
+
     <Button
         android:id="@+id/addSportButton"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="40dp"
-        android:text="Aggiungi"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/Green"
+        android:text="Aggiungi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orarioCampo" />
+        app:layout_constraintTop_toBottomOf="@+id/giorniCampo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

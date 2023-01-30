@@ -52,9 +52,10 @@ class ReservationActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?,view: View?,position: Int,id: Long) {
                 val campoSelezionato: String = parent?.getItemAtPosition(position).toString()
 
-                val cursorCampi:Cursor = db.getTipoCampoAndIndirizzoCampo(campoSelezionato)
+                val cursorCampi:Cursor = db.getTipoCampoAndIndirizzoCampoAndGiorniCampo(campoSelezionato)
                 while(cursorCampi.moveToNext()) {
-                    tipoCampo!!.text = cursorCampi.getString(0)
+                    tipoCampo!!.text = "${cursorCampi.getString(0)}\n" +
+                                       "apertura: ${cursorCampi.getString(4)}"
                     "${cursorCampi.getString(1)}, ${cursorCampi.getString(2)}(${cursorCampi.getString(3)})".also { indirizzoCampo!!.text = it }
                 }
 

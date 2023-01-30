@@ -33,7 +33,7 @@ class AdminSportViewActivity: AppCompatActivity() {
             }
         }
 
-        addButton.setOnClickListener{
+        addButton.setOnClickListener {
             val intent = Intent(this@AdminSportViewActivity,AddSportActivity::class.java)
             startActivity(intent)
         }
@@ -53,7 +53,8 @@ class AdminSportViewActivity: AppCompatActivity() {
                     indirizzoCampo = cursor.getString(3).toString().trim(),
                     cittaCampo = cursor.getString(4).toString().trim(),
                     provinciaCampo = cursor.getString(5).toString().trim(),
-                    orarioCampo = cursor.getString(6).toString().trim())
+                    orarioCampo = cursor.getString(6).toString().trim(),
+                    giorniCampo = cursor.getString(7).toString().trim())
                 campi.add(campo)
             }
         }

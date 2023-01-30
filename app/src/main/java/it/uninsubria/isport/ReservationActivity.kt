@@ -13,6 +13,7 @@ import java.time.Period
 import java.time.Year
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ReservationActivity : AppCompatActivity() {
 
@@ -37,7 +38,6 @@ class ReservationActivity : AppCompatActivity() {
         val spinnerAdapterGiorni:ArrayAdapter<String> = ArrayAdapter<String>(this,R.layout.row)
 
         spinnerAdapterCampi.addAll(getCampi())
-        spinnerAdapterOrari.addAll(getOrari())
         spinnerAdapterMesi.addAll(getMesi())
 
         val campi:Spinner = findViewById(R.id.spinner_campi)
@@ -46,17 +46,24 @@ class ReservationActivity : AppCompatActivity() {
         val giorni:Spinner = findViewById(R.id.spinner_day)
 
         campi.adapter = spinnerAdapterCampi
-        orari.adapter = spinnerAdapterOrari
         mesi.adapter = spinnerAdapterMesi
 
         campi.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?,view: View?,position: Int,id: Long) {
                 val campoSelezionato: String = parent?.getItemAtPosition(position).toString()
-                val cursor:Cursor = db.getTipoCampoAndIndirizzoCampo(campoSelezionato)
-                while(cursor.moveToNext()) {
-                    tipoCampo!!.text = cursor.getString(0)
-                    "${cursor.getString(1)}, ${cursor.getString(2)}(${cursor.getString(3)})".also { indirizzoCampo!!.text = it }
+
+                val cursorCampi:Cursor = db.getTipoCampoAndIndirizzoCampo(campoSelezionato)
+                while(cursorCampi.moveToNext()) {
+                    tipoCampo!!.text = cursorCampi.getString(0)
+                    "${cursorCampi.getString(1)}, ${cursorCampi.getString(2)}(${cursorCampi.getString(3)})".also { indirizzoCampo!!.text = it }
                 }
+
+                spinnerAdapterOrari.clear()
+                val cursorOrari:Cursor = db.getOrarioCampo(campoSelezionato)
+                while(cursorOrari.moveToNext()) {
+                    spinnerAdapterOrari.addAll(setOrariCampo(cursorOrari.getString(0)))
+                }
+                orari.adapter = spinnerAdapterOrari
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) { }
@@ -157,26 +164,6 @@ class ReservationActivity : AppCompatActivity() {
         return Integer.parseInt(giorno)
     }
 
-    private fun getOrari(): ArrayList<String> {
-        val orari = ArrayList<String>()
-        orari.add("8:00-9:00")
-        orari.add("9:00-10:00")
-        orari.add("10:00-11:00")
-        orari.add("11:00-12:00")
-        orari.add("12:00-13:00")
-        orari.add("13:00-14:00")
-        orari.add("14:00-15:00")
-        orari.add("15:00-16:00")
-        orari.add("16:00-17:00")
-        orari.add("17:00-18:00")
-        orari.add("18:00-19:00")
-        orari.add("19:00-20:00")
-        orari.add("20:00-21:00")
-        orari.add("21:00-22:00")
-        orari.add("22:00-23:00")
-        return orari
-    }
-
     private fun getMesi(): ArrayList<String> {
         val mesi = ArrayList<String>()
         mesi.add("Gennaio")
@@ -192,26 +179,6 @@ class ReservationActivity : AppCompatActivity() {
         mesi.add("Novembre")
         mesi.add("Dicembre")
         return mesi
-    }
-
-    private fun getCampi(): ArrayList<String> {
-        val prefs: SharedPreferences = getSharedPreferences("PREFS", MODE_PRIVATE)
-        val comune: String? = prefs.getString("comune",null)
-        val cursor:Cursor = db.getNomeCampi(comune.toString().trim())
-        val campi = ArrayList<String>()
-        while(cursor.moveToNext())
-            campi.add(cursor.getString(0))
-        return campi
-    }
-
-    private fun formatGiorno(giorno:String):String {
-        var giorno = giorno
-        if(giorno == "1" || giorno == "2" || giorno == "3" || giorno == "4"
-            || giorno == "5" || giorno == "6" || giorno == "7" ||
-            giorno == "8" || giorno == "9"){
-            giorno = "0$giorno"
-        }
-        return giorno
     }
 
     private fun formatMese(mese:String):String {
@@ -255,5 +222,43 @@ class ReservationActivity : AppCompatActivity() {
             }
         }
         return mese
+    }
+
+    private fun getCampi(): ArrayList<String> {
+        val prefs: SharedPreferences = getSharedPreferences("PREFS", MODE_PRIVATE)
+        val comune: String? = prefs.getString("comune",null)
+        val cursor:Cursor = db.getNomeCampi(comune.toString().trim())
+        val campi = ArrayList<String>()
+        while(cursor.moveToNext())
+            campi.add(cursor.getString(0))
+        return campi
+    }
+
+    private fun formatGiorno(giorno:String):String {
+        var giorno = giorno
+        if(giorno == "1" || giorno == "2" || giorno == "3" || giorno == "4"
+            || giorno == "5" || giorno == "6" || giorno == "7" ||
+            giorno == "8" || giorno == "9"){
+            giorno = "0$giorno"
+        }
+        return giorno
+    }
+
+    fun setOrariCampo(orario:String):ArrayList<String> {
+        val orariCampo:ArrayList<String> = ArrayList()
+        var orarioInizio = orario.substringBefore("-")
+        orarioInizio = orarioInizio.substringBefore(":")
+        var orarioFine = orario.substringAfter("-")
+        orarioFine = orarioFine.substringBefore(":")
+
+        while(orarioInizio != orarioFine) {
+            val ob:StringBuilder = StringBuilder()
+            orariCampo.add(ob.append(orarioInizio)
+                    .append(":00-")
+                    .append(Integer.parseInt(orarioInizio) + 1)
+                    .append(":00").toString())
+            orarioInizio = (Integer.parseInt(orarioInizio) + 1).toString()
+        }
+        return orariCampo
     }
 }

@@ -53,7 +53,7 @@ class DatabaseHelper(context: Context) :
             "('Matteo','Gallazzi','03/11/1998','Busto Arsizio','matteogallazzi@gmail.com','Pass2','3457968542','0');"
 
     private val insertCampi = "INSERT INTO Campo(NomeCampo,TipoCampo,IndirizzoCampo,CittaCampo,ProvinciaCampo,OrarioCampo) " +
-            "VALUES('Campo comunale','Calcio a 5','Via Roma 38','Busto Arsizio','VA','9:00-22-00')," +
+            "VALUES('Campo comunale','Calcio a 5','Via Roma 38','Busto Arsizio','VA','9:00-22:00')," +
             "('Centro sportivo Galeazzi','Tennis singolo/doppio','Via Giudici 10','Busto Arsizio','VA','10:00-20:00')," +
             "('Centro cestistico','Basket','Via Verdi 46','Gallarate','VA','13:00-21:00');"
 
@@ -92,22 +92,12 @@ class DatabaseHelper(context: Context) :
         }
     }
 
-    fun cercaUtente(username: String?, password: String?): ArrayList<String> {
+    fun cercaUtente(username: String?, password: String?): Cursor {
         val db = this.readableDatabase
-
-        val cursor: Cursor = db.rawQuery(
+        return db.rawQuery(
             "SELECT EmailUtente, PasswordUtente, FlgAdmin FROM Utente " +
-                    "WHERE EmailUtente = '$username' AND PasswordUtente = '$password'",null)
-
-        val lista: ArrayList<String> = ArrayList()
-        if(cursor.moveToFirst()) {
-            lista.add(cursor.getString(0))
-            lista.add(cursor.getString(1))
-            lista.add(cursor.getString(2))
-        } else{
-            cursor.close()
-        }
-        return lista
+                    "WHERE EmailUtente = '$username' AND PasswordUtente = '$password'", null
+        )
     }
 
     fun readAllCampi(): Cursor {
@@ -274,5 +264,10 @@ class DatabaseHelper(context: Context) :
                                             "FROM Prenotazione " +
                                             "WHERE DataPrenotazione = '$data' " +
                                             "AND UsernameUtente = '$username'",null)
+    }
+
+    fun getOrarioCampo(nomeCampo: String): Cursor {
+        val db:SQLiteDatabase = this.readableDatabase
+        return db.rawQuery("SELECT OrarioCampo FROM Campo WHERE NomeCampo = '$nomeCampo'",null)
     }
 }

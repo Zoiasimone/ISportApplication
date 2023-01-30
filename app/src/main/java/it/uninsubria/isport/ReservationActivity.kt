@@ -140,10 +140,11 @@ class ReservationActivity : AppCompatActivity() {
                     Toast.makeText(this, "Non puoi prenotare oltre i 7 giorni dalla data odierna",
                         Toast.LENGTH_SHORT).show()
                 }
-            } else
+            } else {
                 Toast.makeText(this, "Esiste gia' una prenotazione del campo " +
-                        "'${campi.selectedItem.toString().trim()}' in data '$data' e orario '$orario'",
+                            "'${campi.selectedItem.toString().trim()}' in data '$data' e orario '$orario'",
                     Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.Period
 import java.time.Year
@@ -72,31 +73,178 @@ class ReservationActivity : AppCompatActivity() {
 
         mesi.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val giorniSettimana = db.getGiorniCampo(campi.selectedItem.toString().trim())
+                val giornoInizio = giorniSettimana.substringBefore("-")
+                val giornoFine = giorniSettimana.substringAfter("-")
+                val calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"), Locale.ITALY)
+                calendar.set(Calendar.YEAR,2023)
+                val giorniApertura:ArrayList<String> = giorniInApertura(giornoInizio,giornoFine)
                 when (parent?.getItemAtPosition(position).toString()) {
+                    "Gennaio" -> {
+                        var i = 0
+                        spinnerAdapterGiorni.clear()
+                        calendar.set(Calendar.MONTH, 0)
+                        while (i < 31) {
+                            i += 1
+                            calendar.set(Calendar.DAY_OF_MONTH, i)
+                            val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
+                            if(giorniApertura.contains(data)) {
+                                spinnerAdapterGiorni.add(i.toString())
+                            }
+                        }
+                        giorni.adapter = spinnerAdapterGiorni
+                    }
                     "Febbraio" -> {
                         var i = 0
                         spinnerAdapterGiorni.clear()
+                        calendar.set(Calendar.MONTH, 1)
                         while (i < 28) {
                             i += 1
-                            spinnerAdapterGiorni.add(i.toString())
+                            calendar.set(Calendar.DAY_OF_MONTH, i)
+                            val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
+                            if(giorniApertura.contains(data)) {
+                                spinnerAdapterGiorni.add(i.toString())
+                            }
                         }
                         giorni.adapter = spinnerAdapterGiorni
                     }
-                    "Aprile", "Giugno", "Settembre", "Novembre" -> {
+                    "Marzo" -> {
                         var i = 0
                         spinnerAdapterGiorni.clear()
-                        while (i < 30) {
-                            i += 1
-                            spinnerAdapterGiorni.add(i.toString())
-                        }
-                        giorni.adapter = spinnerAdapterGiorni
-                    }
-                    "Gennaio", "Marzo", "Maggio", "Luglio", "Agosto", "Ottobre", "Dicembre" -> {
-                        var i = 0
-                        spinnerAdapterGiorni.clear()
+                        calendar.set(Calendar.MONTH, 2)
                         while (i < 31) {
                             i += 1
-                            spinnerAdapterGiorni.add(i.toString())
+                            calendar.set(Calendar.DAY_OF_MONTH, i)
+                            val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
+                            if(giorniApertura.contains(data)) {
+                                spinnerAdapterGiorni.add(i.toString())
+                            }
+                        }
+                        giorni.adapter = spinnerAdapterGiorni
+                    }
+                    "Aprile" -> {
+                        var i = 0
+                        spinnerAdapterGiorni.clear()
+                        calendar.set(Calendar.MONTH, 3)
+                        while (i < 30) {
+                            i += 1
+                            calendar.set(Calendar.DAY_OF_MONTH, i)
+                            val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
+                            if(giorniApertura.contains(data)) {
+                                spinnerAdapterGiorni.add(i.toString())
+                            }
+                        }
+                        giorni.adapter = spinnerAdapterGiorni
+                    }
+                    "Maggio" -> {
+                        var i = 0
+                        spinnerAdapterGiorni.clear()
+                        calendar.set(Calendar.MONTH, 4)
+                        while (i < 31) {
+                            i += 1
+                            calendar.set(Calendar.DAY_OF_MONTH, i)
+                            val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
+                            if(giorniApertura.contains(data)) {
+                                spinnerAdapterGiorni.add(i.toString())
+                            }
+                        }
+                        giorni.adapter = spinnerAdapterGiorni
+                    }
+                    "Giugno" -> {
+                        var i = 0
+                        spinnerAdapterGiorni.clear()
+                        calendar.set(Calendar.MONTH, 5)
+                        while (i < 30) {
+                            i += 1
+                            calendar.set(Calendar.DAY_OF_MONTH, i)
+                            val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
+                            if(giorniApertura.contains(data)) {
+                                spinnerAdapterGiorni.add(i.toString())
+                            }
+                        }
+                        giorni.adapter = spinnerAdapterGiorni
+                    }
+                    "Luglio" -> {
+                        var i = 0
+                        spinnerAdapterGiorni.clear()
+                        calendar.set(Calendar.MONTH, 6)
+                        while (i < 31) {
+                            i += 1
+                            calendar.set(Calendar.DAY_OF_MONTH, i)
+                            val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
+                            if(giorniApertura.contains(data)) {
+                                spinnerAdapterGiorni.add(i.toString())
+                            }
+                        }
+                        giorni.adapter = spinnerAdapterGiorni
+                    }
+                    "Agosto" -> {
+                        var i = 0
+                        spinnerAdapterGiorni.clear()
+                        calendar.set(Calendar.MONTH, 7)
+                        while (i < 31) {
+                            i += 1
+                            calendar.set(Calendar.DAY_OF_MONTH, i)
+                            val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
+                            if(giorniApertura.contains(data)) {
+                                spinnerAdapterGiorni.add(i.toString())
+                            }
+                        }
+                        giorni.adapter = spinnerAdapterGiorni
+                    }
+                    "Settembre" -> {
+                        var i = 0
+                        spinnerAdapterGiorni.clear()
+                        calendar.set(Calendar.MONTH, 8)
+                        while (i < 30) {
+                            i += 1
+                            calendar.set(Calendar.DAY_OF_MONTH, i)
+                            val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
+                            if(giorniApertura.contains(data)) {
+                                spinnerAdapterGiorni.add(i.toString())
+                            }
+                        }
+                        giorni.adapter = spinnerAdapterGiorni
+                    }
+                    "Ottobre" -> {
+                        var i = 0
+                        spinnerAdapterGiorni.clear()
+                        calendar.set(Calendar.MONTH, 9)
+                        while (i < 31) {
+                            i += 1
+                            calendar.set(Calendar.DAY_OF_MONTH, i)
+                            val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
+                            if(giorniApertura.contains(data)) {
+                                spinnerAdapterGiorni.add(i.toString())
+                            }
+                        }
+                        giorni.adapter = spinnerAdapterGiorni
+                    }
+                    "Novembre" -> {
+                        var i = 0
+                        spinnerAdapterGiorni.clear()
+                        calendar.set(Calendar.MONTH, 10)
+                        while (i < 30) {
+                            i += 1
+                            calendar.set(Calendar.DAY_OF_MONTH, i)
+                            val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
+                            if(giorniApertura.contains(data)) {
+                                spinnerAdapterGiorni.add(i.toString())
+                            }
+                        }
+                        giorni.adapter = spinnerAdapterGiorni
+                    }
+                    "Dicembre" -> {
+                        var i = 0
+                        spinnerAdapterGiorni.clear()
+                        calendar.set(Calendar.MONTH, 11)
+                        while (i < 31) {
+                            i += 1
+                            calendar.set(Calendar.DAY_OF_MONTH, i)
+                            val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
+                            if(giorniApertura.contains(data)) {
+                                spinnerAdapterGiorni.add(i.toString())
+                            }
                         }
                         giorni.adapter = spinnerAdapterGiorni
                     }
@@ -184,46 +332,22 @@ class ReservationActivity : AppCompatActivity() {
     }
 
     private fun formatMese(mese:String):String {
-        var mese = mese
-        when (mese) {
-            "Gennaio" -> {
-                mese = "01"
-            }
-            "Febbraio" -> {
-                mese = "02"
-            }
-            "Marzo" -> {
-                mese = "03"
-            }
-            "Aprile" -> {
-                mese = "04"
-            }
-            "Maggio" -> {
-                mese = "05"
-            }
-            "Giugno" -> {
-                mese = "06"
-            }
-            "Luglio" -> {
-                mese = "07"
-            }
-            "Agosto" -> {
-                mese = "08"
-            }
-            "Settembre" -> {
-                mese = "09"
-            }
-            "Ottobre" -> {
-                mese = "10"
-            }
-            "Novembre" -> {
-                mese = "11"
-            }
-            "Dicembre" -> {
-                mese = "12"
-            }
+        var meseFormat = mese
+        when (meseFormat) {
+            "Gennaio" -> { meseFormat = "01" }
+            "Febbraio" -> { meseFormat = "02" }
+            "Marzo" -> { meseFormat = "03" }
+            "Aprile" -> { meseFormat = "04" }
+            "Maggio" -> { meseFormat = "05" }
+            "Giugno" -> { meseFormat = "06" }
+            "Luglio" -> { meseFormat = "07" }
+            "Agosto" -> { meseFormat = "08" }
+            "Settembre" -> { meseFormat = "09" }
+            "Ottobre" -> { meseFormat = "10" }
+            "Novembre" -> { meseFormat = "11" }
+            "Dicembre" -> { meseFormat = "12" }
         }
-        return mese
+        return meseFormat
     }
 
     private fun getCampi(): ArrayList<String> {
@@ -262,5 +386,47 @@ class ReservationActivity : AppCompatActivity() {
             orarioInizio = (Integer.parseInt(orarioInizio) + 1).toString()
         }
         return orariCampo
+    }
+
+    private fun giorniInApertura(giornoI:String,giornoF:String): ArrayList<String> {
+        var giorniSettimana = "lunmarmergiovensabdom"
+        val giorni = ArrayList<String>()
+        when(giornoF) {
+            "mar" -> giorniSettimana = giorniSettimana.substringBefore("mer")
+            "mer" -> giorniSettimana = giorniSettimana.substringBefore("gio")
+            "gio" -> giorniSettimana = giorniSettimana.substringBefore("ven")
+            "ven" -> giorniSettimana = giorniSettimana.substringBefore("sab")
+            "sab" -> giorniSettimana = giorniSettimana.substringBefore("dom")
+        }
+        when(giornoI) {
+            "mar" -> giorniSettimana = giorniSettimana.substringAfter("lun")
+            "mer" -> giorniSettimana = giorniSettimana.substringAfter("mar")
+            "gio" -> giorniSettimana = giorniSettimana.substringAfter("mer")
+            "ven" -> giorniSettimana = giorniSettimana.substringAfter("gio")
+            "sab" -> giorniSettimana = giorniSettimana.substringAfter("ven")
+        }
+        if(giorniSettimana.contains("lun")){
+            giorni.add(giorniSettimana.substring(0,3))
+        }
+        if(giorniSettimana.contains("mar")){
+            giorni.add(giorniSettimana.substring(3,6))
+        }
+        if(giorniSettimana.contains("mer")){
+            giorni.add(giorniSettimana.substring(6,9))
+        }
+        if(giorniSettimana.contains("gio")){
+            giorni.add(giorniSettimana.substring(9,12))
+        }
+        if(giorniSettimana.contains("ven")){
+            giorni.add(giorniSettimana.substring(12,15))
+        }
+        if(giorniSettimana.contains("sab")){
+            giorni.add(giorniSettimana.substring(15,18))
+        }
+        if(giorniSettimana.contains("dom")){
+            giorni.add(giorniSettimana.substring(18,21))
+        }
+
+        return giorni
     }
 }

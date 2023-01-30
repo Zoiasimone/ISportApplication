@@ -270,4 +270,12 @@ class DatabaseHelper(context: Context) :
         val db:SQLiteDatabase = this.readableDatabase
         return db.rawQuery("SELECT OrarioCampo FROM Campo WHERE NomeCampo = '$nomeCampo'",null)
     }
+
+    fun getGiorniCampo(nomeCampo: String): String {
+        val db:SQLiteDatabase = this.readableDatabase
+        val cursor:Cursor = db.rawQuery("SELECT GiorniCampo FROM Campo " +
+                                            "WHERE NomeCampo = '$nomeCampo'",null)
+        cursor.moveToFirst()
+        return cursor.getString(0)
+    }
 }

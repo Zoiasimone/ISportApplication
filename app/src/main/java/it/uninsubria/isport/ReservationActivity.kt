@@ -77,7 +77,6 @@ class ReservationActivity : AppCompatActivity() {
                 val giornoInizio = giorniSettimana.substringBefore("-")
                 val giornoFine = giorniSettimana.substringAfter("-")
                 val calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"), Locale.ITALY)
-                calendar.set(Calendar.YEAR,2023)
                 val giorniApertura:ArrayList<String> = giorniInApertura(giornoInizio,giornoFine)
                 when (parent?.getItemAtPosition(position).toString()) {
                     "Gennaio" -> {
@@ -89,7 +88,7 @@ class ReservationActivity : AppCompatActivity() {
                             calendar.set(Calendar.DAY_OF_MONTH, i)
                             val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
                             if(giorniApertura.contains(data)) {
-                                spinnerAdapterGiorni.add(i.toString())
+                                spinnerAdapterGiorni.add("$data $i")
                             }
                         }
                         giorni.adapter = spinnerAdapterGiorni
@@ -103,7 +102,7 @@ class ReservationActivity : AppCompatActivity() {
                             calendar.set(Calendar.DAY_OF_MONTH, i)
                             val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
                             if(giorniApertura.contains(data)) {
-                                spinnerAdapterGiorni.add(i.toString())
+                                spinnerAdapterGiorni.add("$data $i")
                             }
                         }
                         giorni.adapter = spinnerAdapterGiorni
@@ -117,7 +116,7 @@ class ReservationActivity : AppCompatActivity() {
                             calendar.set(Calendar.DAY_OF_MONTH, i)
                             val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
                             if(giorniApertura.contains(data)) {
-                                spinnerAdapterGiorni.add(i.toString())
+                                spinnerAdapterGiorni.add("$data $i")
                             }
                         }
                         giorni.adapter = spinnerAdapterGiorni
@@ -131,7 +130,7 @@ class ReservationActivity : AppCompatActivity() {
                             calendar.set(Calendar.DAY_OF_MONTH, i)
                             val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
                             if(giorniApertura.contains(data)) {
-                                spinnerAdapterGiorni.add(i.toString())
+                                spinnerAdapterGiorni.add("$data $i")
                             }
                         }
                         giorni.adapter = spinnerAdapterGiorni
@@ -145,7 +144,7 @@ class ReservationActivity : AppCompatActivity() {
                             calendar.set(Calendar.DAY_OF_MONTH, i)
                             val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
                             if(giorniApertura.contains(data)) {
-                                spinnerAdapterGiorni.add(i.toString())
+                                spinnerAdapterGiorni.add("$data $i")
                             }
                         }
                         giorni.adapter = spinnerAdapterGiorni
@@ -159,7 +158,7 @@ class ReservationActivity : AppCompatActivity() {
                             calendar.set(Calendar.DAY_OF_MONTH, i)
                             val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
                             if(giorniApertura.contains(data)) {
-                                spinnerAdapterGiorni.add(i.toString())
+                                spinnerAdapterGiorni.add("$data $i")
                             }
                         }
                         giorni.adapter = spinnerAdapterGiorni
@@ -173,7 +172,7 @@ class ReservationActivity : AppCompatActivity() {
                             calendar.set(Calendar.DAY_OF_MONTH, i)
                             val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
                             if(giorniApertura.contains(data)) {
-                                spinnerAdapterGiorni.add(i.toString())
+                                spinnerAdapterGiorni.add("$data $i")
                             }
                         }
                         giorni.adapter = spinnerAdapterGiorni
@@ -187,7 +186,7 @@ class ReservationActivity : AppCompatActivity() {
                             calendar.set(Calendar.DAY_OF_MONTH, i)
                             val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
                             if(giorniApertura.contains(data)) {
-                                spinnerAdapterGiorni.add(i.toString())
+                                spinnerAdapterGiorni.add("$data $i")
                             }
                         }
                         giorni.adapter = spinnerAdapterGiorni
@@ -201,7 +200,7 @@ class ReservationActivity : AppCompatActivity() {
                             calendar.set(Calendar.DAY_OF_MONTH, i)
                             val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
                             if(giorniApertura.contains(data)) {
-                                spinnerAdapterGiorni.add(i.toString())
+                                spinnerAdapterGiorni.add("$data $i")
                             }
                         }
                         giorni.adapter = spinnerAdapterGiorni
@@ -215,7 +214,7 @@ class ReservationActivity : AppCompatActivity() {
                             calendar.set(Calendar.DAY_OF_MONTH, i)
                             val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
                             if(giorniApertura.contains(data)) {
-                                spinnerAdapterGiorni.add(i.toString())
+                                spinnerAdapterGiorni.add("$data $i")
                             }
                         }
                         giorni.adapter = spinnerAdapterGiorni
@@ -229,7 +228,7 @@ class ReservationActivity : AppCompatActivity() {
                             calendar.set(Calendar.DAY_OF_MONTH, i)
                             val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
                             if(giorniApertura.contains(data)) {
-                                spinnerAdapterGiorni.add(i.toString())
+                                spinnerAdapterGiorni.add("$data $i")
                             }
                         }
                         giorni.adapter = spinnerAdapterGiorni
@@ -243,7 +242,7 @@ class ReservationActivity : AppCompatActivity() {
                             calendar.set(Calendar.DAY_OF_MONTH, i)
                             val data = SimpleDateFormat("EE",Locale.ITALY).format(calendar.time)
                             if(giorniApertura.contains(data)) {
-                                spinnerAdapterGiorni.add(i.toString())
+                                spinnerAdapterGiorni.add("$data $i")
                             }
                         }
                         giorni.adapter = spinnerAdapterGiorni
@@ -259,7 +258,7 @@ class ReservationActivity : AppCompatActivity() {
             val idUtente:Int = db.cercaIdUtenteByUsername(username.toString())
             val idCampo:Int = db.cercaIdCampoByNomeCampo(campi.selectedItem.toString().trim())
             val orario:String = orari.selectedItem.toString().trim()
-            val giorno:String = formatGiorno(giorni.selectedItem.toString().trim())
+            val giorno:String = formatGiorno(giorni.selectedItem.toString().substring(4))
             val mese:String = formatMese(mesi.selectedItem.toString().trim())
             val anno:Int = Year.now().value
             val data = "$giorno/$mese/$anno"
@@ -268,24 +267,29 @@ class ReservationActivity : AppCompatActivity() {
             calendar.set(anno,subStringMese(mese),subStringGiorno(giorno))
             val settimana:Int = calendar.get(Calendar.WEEK_OF_YEAR)
             val formatter:DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            val dataPrenotazione: LocalDate = LocalDate.parse("$anno-$mese-$giorno",formatter)
+            val dataPrenotazione:LocalDate = LocalDate.parse("$anno-$mese-$giorno",formatter)
             val dataNow:LocalDate = LocalDate.now()
             val dataOdierna:LocalDate = LocalDate.parse(dataNow.toString(),formatter)
-            val diff: Period = Period.between(dataOdierna, dataPrenotazione)
+            val diff:Period = Period.between(dataOdierna, dataPrenotazione)
 
             val cursorPrenotazione:Cursor = db.prenotazioneGiaPresente(orario,data)
             val cursorSettimana:Cursor = db.readSettimanaPrenotazioni(settimana,username.toString())
 
             if(cursorPrenotazione.count == 0) {
-                if(diff.days < 7 && diff.months == 0 && diff.years == 0) {
-                    if(cursorSettimana.count < 3) {
-                        db.insertPrenotazione(idUtente, username.toString(), idCampo,orario,data, settimana)
+                if(dataPrenotazione.isBefore(dataOdierna)) {
+                    if(diff.days < 7 && diff.months == 0 && diff.years == 0) {
+                        if(cursorSettimana.count < 3) {
+                            db.insertPrenotazione(idUtente,username.toString(),idCampo,orario,data,settimana)
+                        } else {
+                            Toast.makeText(this, "Hai già effettuato 3 prenotazioni per questa settimana",
+                                Toast.LENGTH_SHORT).show()
+                        }
                     } else {
-                        Toast.makeText(this, "Hai già effettuato 3 prenotazioni per questa settimana",
+                        Toast.makeText(this, "Non puoi prenotare oltre i 7 giorni dalla data odierna",
                             Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this, "Non puoi prenotare oltre i 7 giorni dalla data odierna",
+                    Toast.makeText(this, "La data scelta non e' valida, scegliere una data maggiore della data odierna",
                         Toast.LENGTH_SHORT).show()
                 }
             } else {
@@ -360,11 +364,9 @@ class ReservationActivity : AppCompatActivity() {
         return campi
     }
 
-    private fun formatGiorno(giorno:String):String {
-        var giorno = giorno
-        if(giorno == "1" || giorno == "2" || giorno == "3" || giorno == "4"
-            || giorno == "5" || giorno == "6" || giorno == "7" ||
-            giorno == "8" || giorno == "9"){
+    private fun formatGiorno(giornoP:String):String {
+        var giorno = giornoP
+        if(Integer.parseInt(giorno) <= 9) {
             giorno = "0$giorno"
         }
         return giorno

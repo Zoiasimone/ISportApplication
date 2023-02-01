@@ -268,15 +268,14 @@ class ReservationActivity : AppCompatActivity() {
             val settimana:Int = calendar.get(Calendar.WEEK_OF_YEAR)
             val formatter:DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val dataPrenotazione:LocalDate = LocalDate.parse("$anno-$mese-$giorno",formatter)
-            val dataNow:LocalDate = LocalDate.now()
-            val dataOdierna:LocalDate = LocalDate.parse(dataNow.toString(),formatter)
+            val dataOdierna:LocalDate = LocalDate.parse(LocalDate.now().toString(),formatter)
             val diff:Period = Period.between(dataOdierna, dataPrenotazione)
 
             val cursorPrenotazione:Cursor = db.prenotazioneGiaPresente(orario,data)
             val cursorSettimana:Cursor = db.readSettimanaPrenotazioni(settimana,username.toString())
 
             if(cursorPrenotazione.count == 0) {
-                if(dataPrenotazione.isBefore(dataOdierna)) {
+                if(dataPrenotazione.isAfter(dataOdierna)) {
                     if(diff.days < 7 && diff.months == 0 && diff.years == 0) {
                         if(cursorSettimana.count < 3) {
                             db.insertPrenotazione(idUtente,username.toString(),idCampo,orario,data,settimana)
